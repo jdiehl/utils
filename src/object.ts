@@ -16,7 +16,10 @@ export function each<T = any>(obj: any, cb: (value: T, key: string) => boolean |
 }
 
 // iterative asynchronously over all elements of an object
-export async function eachAsync<T = any>(objects: any, cb: (obj: T, key: string) => Promise<void> | void): Promise<void> {
+export async function eachAsync<T = any>(
+  objects: any,
+  cb: (obj: T, key: string) => Promise<void> | void
+): Promise<void> {
   const promises: Array<Promise<void>> = []
   each<T>(objects, (obj, key) => {
     const promise = cb(obj, key)
@@ -24,7 +27,6 @@ export async function eachAsync<T = any>(objects: any, cb: (obj: T, key: string)
   })
   await Promise.all<void>(promises)
 }
-
 
 // clone an array
 export function equals<T = any>(a: T, b: T): boolean {

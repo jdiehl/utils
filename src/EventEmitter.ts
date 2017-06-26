@@ -1,18 +1,18 @@
 import { each, removeObject } from './object'
 
-export interface EventSubscription {
+export interface IEventSubscription {
   destroy(): void
-  trigger(...args: any[]): EventSubscription
+  trigger(...args: any[]): IEventSubscription
 }
 
 // event emitter base class
 export class EventEmitter<EventType extends string = string> {
 
-  private subscriptions: { [event: string]: EventSubscription[] } = {}
+  private subscriptions: { [event: string]: IEventSubscription[] } = {}
 
-  on(event: EventType, listener: (...args: any[]) => void): EventSubscription {
+  on(event: EventType, listener: (...args: any[]) => void): IEventSubscription {
     this.subscriptions[event] = this.subscriptions[event] || []
-    const subscription: EventSubscription = {
+    const subscription: IEventSubscription = {
       destroy: () => removeObject(this.subscriptions[event], listener),
       trigger: (...args: any[]) => {
         listener.apply(null, args)
@@ -31,7 +31,7 @@ export class EventEmitter<EventType extends string = string> {
   }
 
   destroyAllSubscriptions() {
-    each<EventSubscription[]>(this.subscriptions, subs => subs.forEach(sub => sub.destroy()))
+    each<IEventSubscription[]>(this.subscriptions, subs => subs.forEach(sub => sub.destroy()))
   }
 
 }

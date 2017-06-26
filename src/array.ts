@@ -1,7 +1,6 @@
 // convert array values to string
-export interface Stringifiable { toString(): void }
-export function mapToString(array: Stringifiable[] = []): string[] {
-  return array.map<any>(d => d.toString())
+export function mapToString(array: Array<{ toString(): string }>): string[] {
+  return array.map(d => d.toString())
 }
 
 // return a random element from the given array

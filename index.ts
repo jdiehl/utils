@@ -1,5 +1,5 @@
 export { mapToString, randomElement } from './src/array'
-export { EventEmitter, EventSubscription } from './src/EventEmitter'
+export { EventEmitter, IEventSubscription } from './src/EventEmitter'
 export { throttle, wait } from './src/timer'
 export { randomInt, within } from './src/number'
 export { clone, each, eachAsync, equals, makeIndex, removeObject, setOrRemove } from './src/object'

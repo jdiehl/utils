@@ -4,8 +4,8 @@ export function randomInt(min: number, spread: number): number {
 }
 
 // ensure that a is within [b c]
-export function within(a: number, b: number, c: number): number {
-  if (a < b) return b
-  if (a > c) return c
-  return a
+export function within(x: number, lower: number, upper: number): number {
+  if (x < lower) return lower
+  if (x > upper) return upper
+  return x
 }

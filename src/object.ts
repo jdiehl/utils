@@ -1,8 +1,26 @@
-// clone an array
+// clone an object
 export function clone(obj: any): any {
   if (typeof obj !== 'object') return obj
+  if (obj instanceof Date) return new Date(obj)
   if (obj instanceof Array) return obj.map(x => x)
-  throw new Error('Object cloning not implemented')
+  const res: any = {}
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      res[key] = clone(obj[key])
+    }
+  }
+  return res
+}
+
+// extend
+export function extend(obj: any, extension: any): any {
+  if (!extension) return obj
+  for (const key in extension) {
+    if (extension.hasOwnProperty(key)) {
+      obj[key] = extension[key]
+    }
+  }
+  return obj
 }
 
 // iterate over any object yielding [value, key]
@@ -28,7 +46,7 @@ export async function eachAsync<T = any>(
   await Promise.all<void>(promises)
 }
 
-// clone an array
+// deep compare two objects
 export function equals<T = any>(a: T, b: T): boolean {
   if (typeof a !== 'object') return a === b
   if (a instanceof Array && b instanceof Array) {

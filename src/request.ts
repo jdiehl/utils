@@ -1,8 +1,8 @@
-interface IRequestHeaders {
+export interface IRequestHeaders {
   [key: string]: string
 }
 
-interface IRequestOptions {
+export interface IRequestOptions {
   method?: string
   url: string
   path?: string
@@ -14,7 +14,7 @@ function getUrlWithPath(options: IRequestOptions): string {
   const { path, url } = options
   if (!path) return url
 
-  const urlHasSlash = url[URL.length - 1] === '/'
+  const urlHasSlash = url[url.length - 1] === '/'
   const pathHasSlash = path[0] === '/'
   if (urlHasSlash && pathHasSlash) {
     return url + path.substr(1)
@@ -54,7 +54,7 @@ export function request<T = any>(options: IRequestOptions): Promise<T> {
     const xhr = new XMLHttpRequest()
 
     // event handlers
-    xhr.addEventListener('error', err => reject(err))
+    xhr.addEventListener('error', err => reject(err || 'Request error'))
     xhr.addEventListener('timeout', () => reject('Request timed out'))
     xhr.addEventListener('load', (x: any) => {
       let res = xhr.responseText as any

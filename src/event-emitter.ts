@@ -1,4 +1,5 @@
-import { each, removeObject } from './object'
+import { removeValue } from './array'
+import { each } from './object'
 
 export interface IEventSubscription {
   destroy(): void
@@ -13,7 +14,7 @@ export class EventEmitter<EventType extends string = string> {
   on(event: EventType, listener: (...args: any[]) => void): IEventSubscription {
     this.subscriptions[event] = this.subscriptions[event] || []
     const subscription: IEventSubscription = {
-      destroy: () => removeObject(this.subscriptions[event], subscription),
+      destroy: () => removeValue(this.subscriptions[event], subscription),
       trigger: (...args: any[]) => {
         listener.apply(null, args)
         return subscription

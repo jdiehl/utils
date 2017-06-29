@@ -5,6 +5,6 @@ export function throttle(then: () => void, delay: number = 100) {
   throttleTimeout = setTimeout(then, delay)
 }
 
-export function wait(delay = 0): Promise<void> {
+export function wait(delay: number = 0): Promise<void> {
   return new Promise<void>(resolve => setTimeout(resolve, delay))
 }

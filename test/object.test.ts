@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { spy, stub } from 'sinon'
-import { clone, each, eachAsync, equals, extend, makeIndex, removeObject, setOrRemove } from '../'
+import { clone, each, eachAsync, equals, extend, makeIndex, setOrRemove } from '../'
 
 describe('object', () => {
 
@@ -76,17 +76,17 @@ describe('object', () => {
     expect(equals([0, 1], [0, 2])).to.be.false
   })
 
-  it('extend() should extend an array', () => {
+  it('extend() should extend an object', () => {
     const x = extend({ a: 1 }, { b: 2 })
     expect(x).to.deep.equal({ a: 1, b: 2 })
   })
 
-  it('extend() should deep extend an array', () => {
+  it('extend() should deep extend an object', () => {
     const x = extend({ a: 1, b: { c: 3 } }, { x: 2, y: { z: 4 } })
     expect(x).to.deep.equal({ a: 1, b: { c: 3 }, x: 2, y: { z: 4 } })
   })
 
-  it('extend() should overwrite attributes in an array', () => {
+  it('extend() should overwrite attributes in an object', () => {
     const x = extend({ a: 1 }, { a: 2 })
     expect(x).to.deep.equal({ a: 2 })
   })
@@ -114,32 +114,6 @@ describe('object', () => {
     const x = makeIndex([a, b], 'id')
     expect(x[1]).to.equal(b)
     expect(Object.keys(x).length).to.equal(1)
-  })
-
-  it('removeObject() should remove an object from an array', () => {
-    const a = {}
-    const array = [a, {}, {}]
-    const res = removeObject(array, a)
-    expect(res).to.be.true
-    expect(array.length).to.equal(2)
-    expect(array.indexOf(a)).to.equal(-1)
-  })
-
-  it('removeObject() should only remove the first object from an array', () => {
-    const a = {}
-    const array = [a, {}, a]
-    removeObject(array, a)
-    expect(array.length).to.equal(2)
-    expect(array[0]).to.not.equal(a)
-    expect(array[1]).to.equal(a)
-  })
-
-  it('removeObject() should not remove an object that is not in an array', () => {
-    const a = {}
-    const array = [{}, {}, {}]
-    const res = removeObject(array, a)
-    expect(res).to.be.false
-    expect(array.length).to.equal(3)
   })
 
   it('setOrRemove() should set an object property', () => {

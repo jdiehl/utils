@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "scripthost", "es5", "es2015.promise"],
+    "lib": ["dom", "scripthost", "es5", "es2015.promise", "es2015.collection"],
     "outDir": "dist",
     "module": "commonjs",
     "moduleResolution": "node",
+    "alwaysStrict": true,
     "declaration": true,
     "noImplicitAny": true,
     "strict": true,

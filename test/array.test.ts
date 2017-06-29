@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { stub } from 'sinon'
-import { mapToString, randomElement } from '../'
+import { mapToString, randomElement, removeValue } from '../'
 
 describe('array', () => {
 
@@ -36,6 +36,32 @@ describe('array', () => {
     const array: void[] = []
     const res = randomElement(array)
     expect(res).to.be.undefined
+  })
+
+  it('removeValue() should remove an object from an array', () => {
+    const a = {}
+    const array = [a, {}, {}]
+    const res = removeValue(array, a)
+    expect(res).to.be.true
+    expect(array.length).to.equal(2)
+    expect(array.indexOf(a)).to.equal(-1)
+  })
+
+  it('removeValue() should only remove the first object from an array', () => {
+    const a = {}
+    const array = [a, {}, a]
+    removeValue(array, a)
+    expect(array.length).to.equal(2)
+    expect(array[0]).to.not.equal(a)
+    expect(array[1]).to.equal(a)
+  })
+
+  it('removeValue() should not remove an object that is not in an array', () => {
+    const a = {}
+    const array = [{}, {}, {}]
+    const res = removeValue(array, a)
+    expect(res).to.be.false
+    expect(array.length).to.equal(3)
   })
 
 })

@@ -13,33 +13,33 @@ export function clone(obj: any): any {
 }
 
 // extend
-export function extend(obj: any, extension: any): any {
+export function extend(obj: object, extension: object | undefined): any {
   if (!extension) return obj
   for (const key in extension) {
     if (extension.hasOwnProperty(key)) {
-      obj[key] = extension[key]
+      (obj as any)[key] = (extension as any)[key]
     }
   }
   return obj
 }
 
 // iterate over any object yielding [value, key]
-export function each<T = any>(obj: any, cb: (value: T, key: string) => boolean | void): void {
+export function each<T = any>(obj: object | undefined, cb: (value: T, key: string) => boolean | void): void {
   if (!obj) return
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
-      if (cb(obj[key], key) === false) return
+      if (cb((obj as any)[key], key) === false) return
     }
   }
 }
 
 // iterative asynchronously over all elements of an object
 export async function eachAsync<T = any>(
-  objects: any,
+  object: object,
   cb: (obj: T, key: string) => Promise<void> | void
 ): Promise<void> {
   const promises: Array<Promise<void>> = []
-  each<T>(objects, (obj, key) => {
+  each<T>(object, (obj, key) => {
     const promise = cb(obj, key)
     if (promise) promises.push(promise)
   })
@@ -59,20 +59,12 @@ export function equals<T = any>(a: T, b: T): boolean {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
-// remove an object from an array
-export function removeObject(array: any[], obj: any): boolean {
-  const i = array.indexOf(obj)
-  if (i < 0) return false
-  array.splice(i, 1)
-  return true
-}
-
 // set or remove a property of an object
-export function setOrRemove(obj: any, key: string, value?: any) {
+export function setOrRemove(obj: object, key: string, value?: any) {
   if (value) {
-    obj[key] = value
+    (obj as any)[key] = value
   } else {
-    delete obj[key]
+    delete (obj as any)[key]
   }
 }
 

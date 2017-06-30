@@ -16,8 +16,8 @@ describe('array', () => {
     const array = [{ toString: a }, { toString: b }]
     const res = mapToString(array)
     expect(res).to.deep.equal(['a', 'b'])
-    expect(a.called).to.be.true
-    expect(b.called).to.be.true
+    expect(a.callCount).to.equal(1)
+    expect(b.callCount).to.equal(1)
   })
 
   it('randomElement() should return the only element of an array', () => {

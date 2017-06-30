@@ -47,7 +47,7 @@ describe('request', () => {
 
   it('get() should make a get request', async () => {
     const res = await get(url + '/get1')
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('GET')
     expect(action.req.url).to.equal('/get1')
     expect(res).to.equal('ok')
@@ -56,7 +56,7 @@ describe('request', () => {
   it('get() should parse JSON data', async () => {
     serverStub.returns({ a: 1 })
     const res = await get(url + '/get2')
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('GET')
     expect(action.req.url).to.equal('/get2')
     expect(action.res.getHeader('Content-Type')).to.equal('application/json')
@@ -65,7 +65,7 @@ describe('request', () => {
 
   it('post() should send post data', async () => {
     const res = await post(url + '/post', { test: 1 })
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('POST')
     expect(action.req.url).to.equal('/post')
     expect(action.body).to.equal('{"test":1}')
@@ -74,7 +74,7 @@ describe('request', () => {
 
   it('put() should send put data', async () => {
     const res = await put(url + '/put', { insert: 'something' })
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('PUT')
     expect(action.req.url).to.equal('/put')
     expect(action.body).to.equal('{"insert":"something"}')
@@ -83,7 +83,7 @@ describe('request', () => {
 
   it('del() should make a delete request', async () => {
     const res = await del(url + '/del')
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('DELETE')
     expect(action.req.url).to.equal('/del')
     expect(res).to.equal('ok')
@@ -95,7 +95,7 @@ describe('request', () => {
     const headers = { foo: 'bar' }
     const body = { bar: 'foo' }
     const res = await request({ method, url, path, headers, body })
-    expect(serverStub.calledOnce).to.be.true
+    expect(serverStub.callCount).to.equal(1)
     expect(action.req.method).to.equal('POST')
     expect(action.req.url).to.equal('/test')
     expect(action.req.headers.foo).to.equal('bar')

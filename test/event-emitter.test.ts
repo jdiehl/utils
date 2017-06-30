@@ -15,7 +15,7 @@ describe('EventEmitter', () => {
 
   it('should call a listener when emitting events', () => {
     emitter.emit('event')
-    expect(listener.called).to.be.true
+    expect(listener.callCount).to.equal(1)
   })
 
   it('should call multiple listeners when emitting events', () => {
@@ -24,8 +24,8 @@ describe('EventEmitter', () => {
     emitter.on('event', a)
     emitter.on('event', b)
     emitter.emit('event')
-    expect(a.called).to.be.true
-    expect(b.called).to.be.true
+    expect(a.callCount).to.equal(1)
+    expect(b.callCount).to.equal(1)
   })
 
   it('should pass a parameter', () => {
@@ -45,19 +45,19 @@ describe('EventEmitter', () => {
     emitter.on('a', a)
     emitter.on('b', b)
     emitter.emit('a')
-    expect(a.called).to.be.true
-    expect(b.called).to.be.false
+    expect(a.callCount).to.equal(1)
+    expect(b.callCount).to.equal(0)
   })
 
   it('should not call a destroyed listener', () => {
     subscription.destroy()
     emitter.emit('event')
-    expect(listener.called).to.be.false
+    expect(listener.callCount).to.equal(0)
   })
 
   it('should manually trigger a listener', () => {
     subscription.trigger()
-    expect(listener.called).to.be.true
+    expect(listener.callCount).to.equal(1)
   })
 
 })

@@ -1,3 +1,13 @@
+// create a promise for node-like callback function
+export async function promise<T = any>(cb: (err: any, res?: T) => void): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    cb((err: any, res?: T) => {
+      if (err) return reject(err)
+      resolve(res)
+    })
+  })
+}
+
 // throttle a callback
 let throttleTimeout: any
 export function throttle(then: () => void, delay: number = 100) {
@@ -5,6 +15,7 @@ export function throttle(then: () => void, delay: number = 100) {
   throttleTimeout = setTimeout(then, delay)
 }
 
+// wait
 export function wait(delay: number = 0): Promise<void> {
   return new Promise<void>(resolve => setTimeout(resolve, delay))
 }

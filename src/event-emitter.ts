@@ -9,7 +9,7 @@ export interface IEventSubscription {
 // event emitter base class
 export class EventEmitter<EventType extends string = string> {
 
-  private subscriptions: { [event: string]: IEventSubscription[] } = {}
+  private subscriptions: Record<string, IEventSubscription[]> = {}
 
   on(event: EventType, listener: (...args: any[]) => void): IEventSubscription {
     this.subscriptions[event] = this.subscriptions[event] || []

@@ -69,8 +69,8 @@ export function setOrRemove(obj: object, key: string, value?: any) {
 }
 
 // create an index of the objects contained in data
-export function makeIndex<T = any>(data: T[], key?: string): { [key: string]: T } {
-  const index: { [key: string]: T } = {}
+export function makeIndex<T = any>(data: T[], key?: string): Record<string, T> {
+  const index: Record<string, T> = {}
   for (const item of data) {
     index[key ? (item as any)[key] as any : item] = item
   }

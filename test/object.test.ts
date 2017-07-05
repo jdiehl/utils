@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { spy, stub } from 'sinon'
-import { clone, each, eachAsync, equals, extend, makeIndex, setOrRemove } from '../'
+import { clone, each, eachAsync, equals, extend, getKeyPath, makeIndex, setOrRemove } from '../'
 
 describe('object', () => {
 
@@ -89,6 +89,25 @@ describe('object', () => {
   it('extend() should overwrite attributes in an object', () => {
     const x = extend({ a: 1 }, { a: 2 })
     expect(x).to.deep.equal({ a: 2 })
+  })
+
+  it('getKeyPath() should fetch a value for a key', () => {
+    const value = {}
+    const obj = { key: value }
+    const x = getKeyPath(obj, 'key')
+    expect(x).to.equal(value)
+  })
+
+  it('getKeyPath() should fetch a value for a key path', () => {
+    const obj = { a: { b: 'c' } }
+    const x = getKeyPath(obj, 'a.b')
+    expect(x).to.equal('c')
+  })
+
+  it('getKeyPath() should return undefined for an invalid key path', () => {
+    const obj = { a: { b: 'c' } }
+    const x = getKeyPath(obj, 'c.d')
+    expect(x).to.be.undefined
   })
 
   it('makeIndex() should create an index of an array', () => {

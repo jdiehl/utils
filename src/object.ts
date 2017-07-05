@@ -59,13 +59,15 @@ export function equals<T = any>(a: T, b: T): boolean {
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
-// set or remove a property of an object
-export function setOrRemove(obj: object, key: string, value?: any) {
-  if (value) {
-    (obj as any)[key] = value
-  } else {
-    delete (obj as any)[key]
+// get the value by following the key path
+export function getKeyPath(object: any, keyPath: string): any {
+  const keys = keyPath.split('.')
+  let value = object
+  for (const key of keys) {
+    if (!value) return
+    value = value[key]
   }
+  return value
 }
 
 // create an index of the objects contained in data
@@ -75,4 +77,13 @@ export function makeIndex<T = any>(data: T[], key?: string): Record<string, T> {
     index[key ? (item as any)[key] as any : item] = item
   }
   return index
+}
+
+// set or remove a property of an object
+export function setOrRemove(obj: object, key: string, value?: any) {
+  if (value) {
+    (obj as any)[key] = value
+  } else {
+    delete (obj as any)[key]
+  }
 }

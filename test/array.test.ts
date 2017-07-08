@@ -1,8 +1,14 @@
 import { expect } from 'chai'
 import { stub } from 'sinon'
-import { mapToString, randomElement, removeValue } from '../'
+import { mapAsync, mapToString, randomElement, removeValue } from '../'
 
 describe('array', () => {
+
+  it('mapAsync() should map an array', async () => {
+    const obj = ['a', 'b']
+    const res = await mapAsync(obj, async (v, k) => `${k}:${v}`)
+    expect(res).to.deep.equal(['0:a', '1:b'])
+  })
 
   it('mapToString() should map an array of numbers to strings', () => {
     const array = [0, 1, 2]

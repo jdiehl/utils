@@ -1,4 +1,4 @@
-export { mapToString, randomElement, removeValue } from './src/array'
+export { mapAsync, mapToString, randomElement, removeValue } from './src/array'
 export { EventEmitter, IEventSubscription } from './src/event-emitter'
 export { promise, throttle, wait } from './src/function'
 export { randomInt, within } from './src/number'

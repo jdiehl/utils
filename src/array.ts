@@ -1,3 +1,17 @@
+// async map function
+export async function mapAsync<T = any, K = any>(
+  array: T[],
+  map: (value: T, index: number) => Promise<K>
+): Promise<K[]> {
+  const promises = []
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i]
+    const promise = map(value, i)
+    promises.push(promise)
+  }
+  return Promise.all<K>(promises)
+}
+
 // convert array values to string
 export function mapToString(array: Array<{ toString(): string }>): string[] {
   return array.map(d => d.toString())

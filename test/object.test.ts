@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { spy, stub } from 'sinon'
-import { clone, each, eachAsync, equals, extend, getKeyPath, makeIndex, setOrRemove } from '../'
+import { clone, each, eachAsync, equals, extend, getKeyPath, makeIndex, map, setOrRemove } from '../'
 
 describe('object', () => {
 
@@ -133,6 +133,12 @@ describe('object', () => {
     const x = makeIndex([a, b], 'id')
     expect(x[1]).to.equal(b)
     expect(Object.keys(x).length).to.equal(1)
+  })
+
+  it('map() should map object values', () => {
+    const x = { a: 1, b: 2 }
+    const y = map(x, (d, k) => k + d)
+    expect(y).to.deep.equal({ a: 'a1', b: 'b2' })
   })
 
   it('setOrRemove() should set an object property', () => {

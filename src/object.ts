@@ -79,6 +79,18 @@ export function makeIndex<T = any>(data: T[], key?: string): Record<string, T> {
   return index
 }
 
+// iterate over any object replacing values
+export function map<T = any>(obj: object | undefined, cb: (value: T, key: string) => any): void {
+  const out: any = {}
+  if (!obj) return
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      out[key] = cb((obj as any)[key], key)
+    }
+  }
+  return out
+}
+
 // set or remove a property of an object
 export function setOrRemove(obj: object, key: string, value?: any) {
   if (value) {

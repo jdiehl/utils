@@ -1,63 +1,58 @@
-import { expect } from 'chai'
-import { spy } from 'sinon'
 import { EventEmitter, IEventSubscription } from '../'
 
-describe('EventEmitter', () => {
-  let listener: any
-  let emitter: EventEmitter
-  let subscription: IEventSubscription
+const listener = jest.fn()
+let emitter: EventEmitter
+let subscription: IEventSubscription
 
-  beforeEach(() => {
-    listener = spy()
-    emitter = new EventEmitter()
-    subscription = emitter.on('event', listener)
-  })
+beforeEach(() => {
+  listener.mockReset()
+  emitter = new EventEmitter()
+  subscription = emitter.on('event', listener)
+})
 
-  it('should call a listener when emitting events', () => {
-    emitter.emit('event')
-    expect(listener.callCount).to.equal(1)
-  })
+test('should call a listener when emitting events', () => {
+  emitter.emit('event')
+  expect(listener).toHaveBeenCalledTimes(1)
+})
 
-  it('should call multiple listeners when emitting events', () => {
-    const a = spy()
-    const b = spy()
-    emitter.on('event', a)
-    emitter.on('event', b)
-    emitter.emit('event')
-    expect(a.callCount).to.equal(1)
-    expect(b.callCount).to.equal(1)
-  })
+test('should call multiple listeners when emitting events', () => {
+  const a = jest.fn()
+  const b = jest.fn()
+  emitter.on('event', a)
+  emitter.on('event', b)
+  emitter.emit('event')
+  expect(a).toHaveBeenCalledTimes(1)
+  expect(b).toHaveBeenCalledTimes(1)
+})
 
-  it('should pass a parameter', () => {
-    emitter.emit('event', 'test')
-    expect(listener.calledWith('test')).to.be.true
-  })
+test('should pass a parameter', () => {
+  emitter.emit('event', 'test')
+  expect(listener).toHaveBeenCalledWith('test')
+})
 
-  it('should pass multiple parameters', () => {
-    const obj = {}
-    emitter.emit('event', 1, 'b', obj)
-    expect(listener.calledWith(1, 'b', obj)).to.be.true
-  })
+test('should pass multiple parameters', () => {
+  const obj = { foo: 'bar' }
+  emitter.emit('event', 1, 'b', obj)
+  expect(listener).toHaveBeenCalledWith(1, 'b', obj)
+})
 
-  it('should only call the correct listener', () => {
-    const a = spy()
-    const b = spy()
-    emitter.on('a', a)
-    emitter.on('b', b)
-    emitter.emit('a')
-    expect(a.callCount).to.equal(1)
-    expect(b.callCount).to.equal(0)
-  })
+test('should only call the correct listener', () => {
+  const a = jest.fn()
+  const b = jest.fn()
+  emitter.on('a', a)
+  emitter.on('b', b)
+  emitter.emit('a')
+  expect(a).toHaveBeenCalledTimes(1)
+  expect(b).toHaveBeenCalledTimes(0)
+})
 
-  it('should not call a destroyed listener', () => {
-    subscription.destroy()
-    emitter.emit('event')
-    expect(listener.callCount).to.equal(0)
-  })
+test('should not call a destroyed listener', () => {
+  subscription.destroy()
+  emitter.emit('event')
+  expect(listener).toHaveBeenCalledTimes(0)
+})
 
-  it('should manually trigger a listener', () => {
-    subscription.trigger()
-    expect(listener.callCount).to.equal(1)
-  })
-
+test('should manually trigger a listener', () => {
+  subscription.trigger()
+  expect(listener).toHaveBeenCalledTimes(1)
 })

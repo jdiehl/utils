@@ -12,7 +12,7 @@ let action: {
 }
 
 beforeAll(async () => {
-  return new Promise((reject, resolve) => {
+  return new Promise((resolve, reject) => {
     (global as any).XMLHttpRequest = XMLHttpRequest
     server = createServer((req, res) => {
       let body = ''
@@ -30,8 +30,7 @@ beforeAll(async () => {
     const instance = server.listen(() => {
       url = `http://127.0.0.1:${instance.address().port}`
       resolve()
-    })
-  })
+    })  })
 })
 
 beforeEach(() => {

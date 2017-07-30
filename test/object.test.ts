@@ -37,7 +37,8 @@ test('clone() should create a clone of a date object', () => {
 test('each() should iterate over an object', () => {
   const iterator = jest.fn()
   const obj = { a: 1, b: 2 }
-  each(obj, iterator)
+  const res = each(obj, iterator)
+  expect(res).toBe(true)
   expect(iterator).toHaveBeenCalledTimes(2)
   expect(iterator).toHaveBeenCalledWith(1, 'a')
   expect(iterator).toHaveBeenCalledWith(2, 'b')
@@ -46,16 +47,18 @@ test('each() should iterate over an object', () => {
 test('each() should cancel iteration upon request', () => {
   const iterator = jest.fn().mockReturnValue(false)
   const obj = { a: 1, b: 2 }
-  each(obj, iterator)
+  const res = each(obj, iterator)
+  expect(res).toBe(false)
   expect(iterator).toHaveBeenCalledTimes(1)
   expect(iterator).toHaveBeenCalledWith(1, 'a')
   expect(iterator).not.toHaveBeenCalledWith(2, 'b')
 })
 
 test('eachAsync() should iterate over an object', async () => {
-  const iterator = jest.fn()
+  const iterator = jest.fn().mockImplementation((x, i) => i)
   const obj = { a: 1, b: 2 }
-  await eachAsync(obj, async (x, i) => iterator(x, i))
+  const res = await eachAsync(obj, async (x, i) => iterator(x, i))
+  expect(res).toEqual(['a', 'b'])
   expect(iterator).toHaveBeenCalledTimes(2)
   expect(iterator).toHaveBeenCalledWith(1, 'a')
   expect(iterator).toHaveBeenLastCalledWith(2, 'b')

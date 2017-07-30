@@ -24,26 +24,29 @@ export function extend(obj: object, extension: object | undefined): any {
 }
 
 // iterate over any object yielding [value, key]
-export function each<T = any>(obj: object | undefined, cb: (value: T, key: string) => boolean | void): void {
-  if (!obj) return
+// can be canceled by returning false, in which case each will also return false
+export function each<T = any>(obj: object | undefined, cb: (value: T, key: string) => boolean | void): boolean {
+  if (!obj) return false
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
-      if (cb((obj as any)[key], key) === false) return
+      if (cb((obj as any)[key], key) === false) return false
     }
   }
+  return true
 }
 
 // iterative asynchronously over all elements of an object
-export async function eachAsync<T = any>(
+// returns an array of promises
+export async function eachAsync<T = any, U = any>(
   object: object,
-  cb: (obj: T, key: string) => Promise<void> | void
-): Promise<void> {
-  const promises: Array<Promise<void>> = []
+  cb: (obj: T, key: string) => Promise<U>
+): Promise<U[]> {
+  const promises: Array<Promise<U>> = []
   each<T>(object, (obj, key) => {
     const promise = cb(obj, key)
     if (promise) promises.push(promise)
   })
-  await Promise.all<void>(promises)
+  return Promise.all<U>(promises)
 }
 
 // deep compare two objects

@@ -1,6 +1,5 @@
 import { createServer, Server, ServerRequest, ServerResponse } from 'http'
 import { del, get, post, put, request } from '../'
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 
 let server: Server
 const serverStub = jest.fn()
@@ -13,7 +12,6 @@ let action: {
 
 beforeAll(async () => {
   return new Promise((resolve, reject) => {
-    (global as any).XMLHttpRequest = XMLHttpRequest
     server = createServer((req, res) => {
       let body = ''
       req.on('data', d => body += d)
@@ -27,10 +25,11 @@ beforeAll(async () => {
         res.end(data)
       })
     })
-    const instance = server.listen(() => {
+    const instance = server.listen(9999, () => {
       url = `http://127.0.0.1:${instance.address().port}`
       resolve()
-    })  })
+    })
+  })
 })
 
 beforeEach(() => {
@@ -39,7 +38,6 @@ beforeEach(() => {
 
 afterAll(() => {
   server.close()
-  delete (global as any).XMLHttpRequest
 })
 
 test('get() should make a get request', async () => {

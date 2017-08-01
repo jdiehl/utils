@@ -1,6 +1,6 @@
 {
   "name": "@-)/utils",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Utility Functions",
   "main": "dist/index.js",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "tslint *.ts src/**.ts test/**.ts; jest",
-    "watch": "jest --watch",
+    "watch": "jest --watch --testPathPattern",
     "build": "tsc --project tsconfig.json",
     "prepublishOnly": "npm run build && npm run test"
   },
@@ -18,17 +18,25 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^20.0.5",
-    "@types/node": "^8.0.10",
+    "@types/node": "^8.0.18",
     "jest": "^20.0.4",
     "ts-jest": "^20.0.7",
     "ts-node": "^3.2.0",
     "tslint": "^5.5.0",
-    "typescript": "^2.4.1",
-    "xmlhttprequest": "^1.8.0"
+    "typescript": "^2.4.1"
   },
   "jest": {
-    "transform": { "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js" },
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testURL": "http://127.0.0.1:9999",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "json", "jsx"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ]
   }
 }

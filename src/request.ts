@@ -54,9 +54,8 @@ export function request<T = any>(options: IRequestOptions): Promise<T> {
     const xhr = new XMLHttpRequest()
 
     // event handlers
-    xhr.addEventListener('error', err => reject(err || 'Request error'))
-    xhr.addEventListener('timeout', () => reject('Request timed out'))
-    xhr.addEventListener('load', (x: any) => {
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4) return
       let res = xhr.responseText as any
       if (xhr.status < 200 || xhr.status >= 300) return reject(res)
       const type = xhr.getResponseHeader('Content-Type')
@@ -64,7 +63,7 @@ export function request<T = any>(options: IRequestOptions): Promise<T> {
         res = JSON.parse(res)
       }
       resolve(res)
-    })
+    }
 
     // initiate request
     xhr.open(method, url)

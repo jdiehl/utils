@@ -1,5 +1,5 @@
 {
-  "name": "@-)/utils",
+  "name": "@didie/utils",
   "version": "1.0.8",
   "description": "Utility Functions",
   "main": "dist/index.js",

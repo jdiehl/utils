@@ -1,7 +1,7 @@
 // clone an object
 export function clone(obj: any): any {
   if (typeof obj !== 'object') return obj
-  if (obj instanceof Date) return new Date(obj)
+  if (obj instanceof Date) return new Date(obj.getTime())
   if (obj instanceof Array) return obj.map(x => x)
   const res: any = {}
   for (const key in obj) {

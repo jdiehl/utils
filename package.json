@@ -1,6 +1,6 @@
 {
   "name": "@didie/utils",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Utility Functions",
   "main": "dist/index.js",
   "repository": {
@@ -11,7 +11,7 @@
     "test": "tslint *.ts src/**.ts test/**.ts; jest",
     "watch": "jest --watch --testPathPattern",
     "build": "tsc --project tsconfig.json",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [],
   "author": "Jonathan Diehl",
@@ -29,7 +29,6 @@
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testURL": "http://127.0.0.1:9999",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
     "moduleFileExtensions": [
       "ts",

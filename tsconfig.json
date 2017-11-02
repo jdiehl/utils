@@ -12,6 +12,7 @@
     "inlineSourceMap": true
   },
   "include": [
-    "index.ts"
+    "index.ts",
+    "src/**.ts"
   ]
 }

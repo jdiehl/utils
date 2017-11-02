@@ -1,7 +1,0 @@
-export * from './src/array'
-export * from './src/date'
-export * from './src/event-emitter'
-export * from './src/function'
-export * from './src/number'
-export * from './src/object'
-export * from './src/string'

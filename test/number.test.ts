@@ -1,4 +1,4 @@
-import { randomInt, within } from '../'
+import { randomInt, within } from '../src'
 
 test('randomInt() should generate an integer', () => {
   const x = randomInt(0, 100)

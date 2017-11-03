@@ -1,4 +1,4 @@
-import { mapAsync, mapToString, randomElement, removeValue } from '../'
+import { mapAsync, mapToString, randomElement, removeValue } from '../src'
 
 test('mapAsync() should map an array', async () => {
   const obj = ['a', 'b']

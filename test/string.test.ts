@@ -1,4 +1,4 @@
-import { escapeRegExp, parseJSON } from '../'
+import { escapeRegExp, parseJSON } from '../src'
 
 test('escapeRegExp() should escape regular expressions in strings', () => {
   expect(escapeRegExp('-[]/{}()*+?.\\^$|')).toBe('\\-\\[\\]\\/\\{\\}\\(\\)\\*\\+\\?\\.\\\\\\^\\$\\|')

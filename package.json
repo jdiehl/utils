@@ -2,8 +2,8 @@
   "name": "@didie/utils",
   "version": "1.0.14-pre",
   "description": "Utility Functions",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "src/**/*.d.ts",
     "src/**/*.js",

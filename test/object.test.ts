@@ -1,4 +1,4 @@
-import { clone, each, eachAsync, equals, extend, getKeyPath, makeIndex, map, setOrRemove } from '../src'
+import { clone, each, eachAsync, equals, extend, getKeyPath, makeIndex, map, setOrRemove } from '../'
 
 test('clone() should return a simple type', () => {
   expect(clone(3)).toBe(3)

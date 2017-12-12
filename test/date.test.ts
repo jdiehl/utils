@@ -1,4 +1,4 @@
-import { stringToDuration } from '../src'
+import { stringToDuration } from '../'
 
 test('stringToDuration() should transform durations', () => {
   expect(stringToDuration('2s')).toBe(2 * 1000)

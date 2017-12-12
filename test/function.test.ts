@@ -1,4 +1,4 @@
-import { promise, throttle, wait } from '../src'
+import { promise, throttle, wait } from '../'
 
 test('promise() should resolve with a given value', async () => {
   const a = {}

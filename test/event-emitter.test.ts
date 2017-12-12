@@ -1,4 +1,4 @@
-import { EventEmitter, IEventSubscription } from '../src'
+import { EventEmitter, IEventSubscription } from '../'
 
 const listener = jest.fn()
 let emitter: EventEmitter

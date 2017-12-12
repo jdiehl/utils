@@ -4,7 +4,12 @@
   "description": "Utility Functions",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist/"],
+  "files": [
+    "src/**/*.d.ts",
+    "src/**/*.js",
+    "index.d.ts",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/jdiehl/utils.git"
@@ -13,19 +18,23 @@
     "test": "tslint *.ts src/**.ts test/**.ts; jest",
     "watch": "jest --watch --testPathPattern",
     "build": "tsc --project tsconfig.json",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "bump": "npm-bump patch",
+    "clean": "del index.js index.d.ts 'src/**/*.d.ts' 'src/**/*.js'"
   },
   "keywords": [],
   "author": "Jonathan Diehl",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^21.1.5",
-    "@types/node": "^8.0.47",
+    "@types/jest": "^21.1.8",
+    "@types/node": "^8.0.58",
+    "del-cli": "^1.1.0",
     "jest": "^21.2.1",
-    "ts-jest": "^21.1.4",
-    "ts-node": "^3.2.0",
+    "npm-bump": "0.0.23",
+    "ts-jest": "^21.2.4",
+    "ts-node": "^4.0.1",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.1"
+    "typescript": "^2.6.2"
   },
   "jest": {
     "globals": {

@@ -1,6 +1,6 @@
 {
   "name": "@didie/utils",
-  "version": "1.0.15-pre",
+  "version": "1.0.15",
   "description": "Utility Functions",
   "main": "index.js",
   "types": "index.d.ts",

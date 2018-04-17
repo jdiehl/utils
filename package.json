@@ -18,7 +18,7 @@
     "test": "tslint *.ts src/**.ts test/**.ts; jest",
     "watch": "jest --watch --testPathPattern",
     "build": "tsc --project tsconfig.json",
-    "prepublishOnly": "npm run build && npm test",
+    "prepublishOnly": "npm test; npm run build",
     "bump": "npm-bump patch",
     "clean": "del index.js index.d.ts 'src/**/*.d.ts' 'src/**/*.js'"
   },

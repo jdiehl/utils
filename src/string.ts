@@ -12,3 +12,11 @@ export function parseJSON(json: string): any {
   }
   return json
 }
+
+export function repeat(text: string, count: number): string {
+  let out = ''
+  for (let i = 0; i < count; i++) {
+    out += text
+  }
+  return out
+}

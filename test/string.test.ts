@@ -1,4 +1,4 @@
-import { escapeRegExp, parseJSON } from '../'
+import { escapeRegExp, parseJSON, repeat } from '../'
 
 test('escapeRegExp() should escape regular expressions in strings', () => {
   expect(escapeRegExp('-[]/{}()*+?.\\^$|')).toBe('\\-\\[\\]\\/\\{\\}\\(\\)\\*\\+\\?\\.\\\\\\^\\$\\|')
@@ -13,4 +13,14 @@ test('parseJSON() should parse a JSON string', () => {
 test('parseJSON() should return an invalid value', () => {
   const res = parseJSON('test')
   expect(res).toBe('test')
+})
+
+test('repeat() should repeat a text 3 times', () => {
+  const res = repeat('Hello', 3)
+  expect(res).toBe('HelloHelloHello')
+})
+
+test('repeat() should repeat a text 0 times', () => {
+  const res = repeat('Foo', 0)
+  expect(res).toBe('')
 })

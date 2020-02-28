@@ -13,7 +13,7 @@ export async function mapAsync<T = any, K = any>(
 }
 
 // convert array values to string
-export function mapToString(array: Array<{ toString(): string }>): string[] {
+export function mapToString(array: { toString(): string }[]): string[] {
   return array.map(d => d.toString())
 }
 

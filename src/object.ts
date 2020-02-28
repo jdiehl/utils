@@ -41,7 +41,7 @@ export async function eachAsync<T = any, U = any>(
   object: object,
   cb: (obj: T, key: string) => Promise<U>
 ): Promise<U[]> {
-  const promises: Array<Promise<U>> = []
+  const promises: Promise<U>[] = []
   each<T>(object, (obj, key) => {
     const promise = cb(obj, key)
     if (promise) promises.push(promise)

@@ -16,7 +16,7 @@ export class EventEmitter<EventType extends string = string> {
     const subscription: IEventSubscription = {
       destroy: () => removeValue(this.subscriptions[event], subscription),
       trigger: (...args: any[]) => {
-        listener.apply(null, args)
+        listener(...args)
         return subscription
       }
     }

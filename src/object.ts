@@ -5,7 +5,7 @@ export function clone(obj: any): any {
   if (obj instanceof Array) return obj.map(x => x)
   const res: any = {}
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       res[key] = clone(obj[key])
     }
   }
@@ -16,7 +16,7 @@ export function clone(obj: any): any {
 export function extend(obj: object, extension: object | undefined): any {
   if (!extension) return obj
   for (const key in extension) {
-    if (extension.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(extension, key)) {
       (obj as any)[key] = (extension as any)[key]
     }
   }
@@ -28,7 +28,7 @@ export function extend(obj: object, extension: object | undefined): any {
 export function each<T = any>(obj: object | undefined, cb: (value: T, key: string) => boolean | void): boolean {
   if (!obj) return false
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       if (cb((obj as any)[key], key) === false) return false
     }
   }
@@ -87,7 +87,7 @@ export function map<T = any>(obj: object | undefined, cb: (value: T, key: string
   const out: any = {}
   if (!obj) return out
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       out[key] = cb((obj as any)[key], key)
     }
   }

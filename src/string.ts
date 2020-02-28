@@ -1,6 +1,6 @@
 // escape any regular expressions inside a string
 export function escapeRegExp(str: string): string {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+  return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&')
 }
 
 // savely parse json strings

@@ -1,8 +1,8 @@
 // clone an object
-export function clone(obj: any): any {
+export function clone<T>(obj: T): T {
   if (typeof obj !== 'object') return obj
-  if (obj instanceof Date) return new Date(obj.getTime())
-  if (obj instanceof Array) return obj.map(x => x)
+  if (obj instanceof Date) return new Date(obj.getTime()) as any
+  if (obj instanceof Array) return obj.map(x => x) as any
   const res: any = {}
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -11,21 +11,20 @@ export function clone(obj: any): any {
   }
   return res
 }
-
 // extend
-export function extend(obj: object, extension: object | undefined): any {
-  if (!extension) return obj
+export function extend<T, E>(obj: T, extension: E | undefined): T & E {
+  if (!extension) return obj as any
   for (const key in extension) {
     if (Object.prototype.hasOwnProperty.call(extension, key)) {
       (obj as any)[key] = (extension as any)[key]
     }
   }
-  return obj
+  return obj as any
 }
 
 // iterate over any object yielding [value, key]
 // can be canceled by returning false, in which case each will also return false
-export function each<T = any>(obj: object | undefined, cb: (value: T, key: string) => boolean | void): boolean {
+export function each<T = any>(obj: Record<string, T> | undefined, cb: (value: T, key: string) => boolean | void): boolean {
   if (!obj) return false
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -37,10 +36,7 @@ export function each<T = any>(obj: object | undefined, cb: (value: T, key: strin
 
 // iterative asynchronously over all elements of an object
 // returns an array of promises
-export async function eachAsync<T = any, U = any>(
-  object: object,
-  cb: (obj: T, key: string) => Promise<U>
-): Promise<U[]> {
+export async function eachAsync<T = any, U = any>(object: Record<string, T>, cb: (obj: T, key: string) => Promise<U>): Promise<U[]> {
   const promises: Promise<U>[] = []
   each<T>(object, (obj, key) => {
     const promise = cb(obj, key)
@@ -63,7 +59,7 @@ export function equals<T = any>(a: T, b: T): boolean {
 }
 
 // get the value by following the key path
-export function getKeyPath(object: any, keyPath: string): any {
+export function getKeyPath(object: Record<string, any>, keyPath: string): any {
   const keys = keyPath.split('.')
   let value = object
   for (const key of keys) {
@@ -83,7 +79,7 @@ export function makeIndex<T = any>(data: T[], key?: string): Record<string, T> {
 }
 
 // iterate over any object replacing values
-export function map<T = any>(obj: object | undefined, cb: (value: T, key: string) => any): T {
+export function map<T, U>(obj: Record<string, T> | undefined, cb: (value: T, key: string) => U): Record<string, U> {
   const out: any = {}
   if (!obj) return out
   for (const key in obj) {
@@ -95,7 +91,7 @@ export function map<T = any>(obj: object | undefined, cb: (value: T, key: string
 }
 
 // set or remove a property of an object
-export function setOrRemove(obj: object, key: string, value?: any) {
+export function setOrRemove<T = any>(obj: Record<string, any>, key: string, value?: T): void {
   if (value) {
     (obj as any)[key] = value
   } else {

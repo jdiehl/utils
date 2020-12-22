@@ -24,14 +24,14 @@ export class EventEmitter<EventType extends string = string> {
     return subscription
   }
 
-  emit(event: EventType, ...args: any[]) {
+  emit(event: EventType, ...args: any[]): void {
     if (!this.subscriptions[event]) return
     for (const subscription of this.subscriptions[event]) {
       subscription.trigger.apply(null, args)
     }
   }
 
-  destroyAllSubscriptions() {
+  destroyAllSubscriptions(): void {
     each<IEventSubscription[]>(this.subscriptions, subs => subs.forEach(sub => sub.destroy()))
   }
 

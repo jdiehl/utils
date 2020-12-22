@@ -3,14 +3,14 @@ export async function promise<T = any>(cb: (err: any, res?: T) => void): Promise
   return new Promise<T>((resolve, reject) => {
     cb((err: any, res?: T) => {
       if (err) return reject(err)
-      resolve(res)
+      resolve(res as any)
     })
   })
 }
 
 // throttle a callback
 let throttleTimeout: any
-export function throttle(then: () => void, delay = 100) {
+export function throttle(then: () => void, delay = 100): void {
   if (throttleTimeout) clearTimeout(throttleTimeout)
   throttleTimeout = setTimeout(then, delay)
 }

@@ -10,7 +10,7 @@ function unitFactor(unit: string): number {
   }
 }
 
-export function stringToDuration(x: string) {
+export function stringToDuration(x: string): number {
   const unit = x[x.length - 1]
   const d = parseInt(x, 10)
   return d * unitFactor(unit)
